@@ -1,7 +1,7 @@
 <template>
   <div>
     <div>
-      <h1>FilterTodos</h1>
+      <h1>Filter Todos</h1>
     </div>
   </div>
 </template>
