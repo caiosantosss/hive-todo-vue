@@ -17,16 +17,14 @@
     data() {
       return {
         title: '',
+        completed: false,
       }
     },
     methods: {
       ...mapActions(['addTodo']),
       onSubmit(event) {
         event.preventDefault();
-        this.addTodo({
-          title: this.title,
-          completed: false,
-        });
+        this.addTodo(this.title);
         this.title = '';
       }
     }
