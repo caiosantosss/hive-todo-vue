@@ -35,5 +35,53 @@ export default {
 </script>
 
 <style scoped>
+.todos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+.todo {
+  border: 1px solid #ccc;
+  background: #41b883;
+  padding: 1rem;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+}
+i {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  color: #fff;
+  cursor: pointer;
+}
+.legend {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+.complete-box,
+.incomplete-box {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+}
+
+.complete-box {
+  background: #35495e;
+}
+.incomplete-box {
+  background: #41b883;
+}
+.is-complete {
+  color: #fff;
+  background: #35495e;
+}
+@media (max-width: 768px) {
+  .todos {
+    grid-template-columns: 1fr;
+  }
+}
 
 </style>
