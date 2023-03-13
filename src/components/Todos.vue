@@ -1,15 +1,25 @@
 <template>
   <div>
-    <div>
-      <h1>Todos</h1>
-      <div class="todos">
-        <div
-          v-for="todo in allTodos"
-          class="todo"
-          v-bind:key="todo.key"
-        >
-          {{ todo.title }}
-        </div>
+    <h3>Todos</h3>
+    <div class="legend">
+      <span>Double click to mark as complete</span>
+      <span>
+        <span class="incomplete-box"></span> = Incomplete
+      </span>
+      <span>
+        <span class="complete-box"></span> = Complete
+      </span>
+    </div>
+    <div class="todos">
+      <div
+        @dblclick="onDblClick(todo)"
+        :key="todo.id"
+        v-for="todo in allTodos"
+        class="todo"
+        v-bind:class="{ 'is-complete': todo.completed }"
+      >
+        {{ todo.title }}
+        <i class="fas fa-trash-alt" v-on:click="deleteTodo(todo.id)"></i>
       </div>
     </div>
   </div>
@@ -21,7 +31,15 @@ export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: 'Todos',
   methods: {
-    ...mapActions(['fetchTodos']),
+    ...mapActions(['fetchTodos', 'deleteTodo', 'updateTodo']),
+    onDblClick(todo) {
+      const updatedTodo = {
+        id: todo.id,
+        title: todo.title,
+        completed: !todo.completed,
+      }
+      this.updateTodo(updatedTodo);
+    }
   },
   computed: {
     ...mapGetters(['allTodos']),
