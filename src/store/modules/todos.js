@@ -8,7 +8,7 @@ const state = {
 const getters = {
   allTodos: state => {
     return state.todos;
-  }
+  },
 };
 
 const actions = {

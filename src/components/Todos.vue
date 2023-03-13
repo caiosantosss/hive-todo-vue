@@ -17,9 +17,13 @@
         @dblclick="onDblClick(todo)"
         class="todo"
         v-bind:class="{ 'is-complete': todo.completed }"
+
       >
         {{ todo.title }}
-        <i class="fas fa-trash-alt" v-on:click="deleteTodo(todo.id)"></i>
+        <div class="buttons">
+          <router-link :to="`/task/${todo.id}`" class="fas fa-solid fa-link"></router-link>
+          <i class="fas fa-trash-alt" v-on:click="deleteTodo(todo.id)"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -72,13 +76,24 @@ export default {
   position: relative;
   cursor: pointer;
 }
-i {
+
+.buttons {
   position: absolute;
   bottom: 10px;
-  right: 10px;
+  right: 20px;
   color: #fff;
   cursor: pointer;
 }
+
+.fa-link {
+  text-decoration: none;
+  color: #fff;
+}
+
+i {
+  margin: 0px 2px;
+}
+
 .legend {
   display: flex;
   justify-content: space-between;
