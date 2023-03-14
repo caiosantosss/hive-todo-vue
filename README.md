@@ -1,5 +1,7 @@
 # hive-todo-vue
 
+Website: https://hive-todo-vue.netlify.app/
+
 ## Project setup
 ```
 npm install
