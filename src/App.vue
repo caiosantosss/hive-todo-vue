@@ -3,7 +3,9 @@
     <div id="nav">
       <router-link class="navbar" to="/">TO DO LIST</router-link>
     </div>
-    <router-view />
+    <keep-alive include="home">
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 

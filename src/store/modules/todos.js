@@ -45,12 +45,17 @@ const actions = {
     // commit the mutation to set the state
     commit('setTodos', response.data);
   },
-  async fetchSingleTodo ({ commit }, id) {
-    // using axios to get the data
-    const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`);
-    // commit the mutation to set the state
-    commit('setTodo', response.data);
-  }
+  // get todo by id from state
+  getTodoById({ commit, state }, id) {
+    const foundTodo = state.todos.find((todo) => {
+      return todo.id === id;
+    });
+    if (foundTodo) {
+      commit("setTodo", foundTodo);
+    } else {
+      commit("setTodo", {});
+    }
+  },
 };
 
 const mutations = {
@@ -62,7 +67,7 @@ const mutations = {
     state.todos = state.todos.filter((todo) => todo.id !== id);
   },
   updateTodo: (state, updatedTodo) => {
-    const index = state.todos.findIndex(todo => todo.id === updatedTodo.id);
+    const index = state.todos.findIndex((todo) => todo.id === updatedTodo.id);
     if (index !== -1) {
       state.todos.splice(index, 1, updatedTodo);
     }

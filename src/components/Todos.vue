@@ -17,8 +17,7 @@
         @dblclick="onDblClick(todo)"
         class="todo"
         v-bind:class="{ 'is-complete': todo.completed }"
-
-      >
+        >
         {{ todo.title }}
         <div class="buttons">
           <router-link :to="`/task/${todo.id}`" class="fas fa-solid fa-link"></router-link>
@@ -43,12 +42,12 @@ export default {
           title: todo.title,
           completed: !todo.completed,
         };
-      this.updateTodo(updatedTodo);
+        this.updateTodo(updatedTodo);
       } else {
         console.log('Todo not found');
       }
     },
-    // create a method to send the todo object to the singleTodo component
+
     sendTodo(todo) {
       this.$router.push({ path: `/task/${todo.id}`, props: { title: todo.title, id: todo.id, completed: todo.completed } });
     }
@@ -57,9 +56,10 @@ export default {
   computed: {
     ...mapGetters(['allTodos']),
   },
-  // when the component is created, fetch the todos
-  created() {
-    this.fetchTodos();
+  mounted() {
+    if (this.allTodos.length === 0) {
+      this.fetchTodos();
+    }
   }
 };
 

@@ -3,14 +3,21 @@
     <h3>Single Todo</h3>
     <div class="single-todo">
       <div class="todo">
-        {{ this.todo.title }}
+        <span v-if="!isEdit">{{ todo.title }}
+          <i class="fas fa-edit" style="margin-left: 10px" v-on:click="isEdit = true" />
+        </span>
+        <!-- add edit icon -->
+        <div v-if="isEdit">
+          <input v-model="todo.title" />
+          <button @click="saveTodo">Save</button>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   data() {
@@ -21,6 +28,7 @@ export default {
         completed: false,
       },
       id: this.$route.params.id,
+      isEdit: false,
     }
   },
 
@@ -29,8 +37,17 @@ export default {
     ...mapGetters(['singleTodo']),
   },
 
-  async mounted() {
-    await this.$store.dispatch('fetchSingleTodo', this.id);
+  methods: {
+    ...mapActions(['getTodoById', 'updateTodo']),
+
+    saveTodo() {
+      this.updateTodo(this.todo);
+      this.isEdit = false;
+    }
+  },
+
+  created() {
+    this.getTodoById(Number(this.id));
     this.todo = this.singleTodo;
   },
 };
