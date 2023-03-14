@@ -3,7 +3,7 @@
     <h3>Single Todo</h3>
     <div class="single-todo">
       <div class="todo">
-        {{ this.todo }}
+        {{ this.todo.title }}
       </div>
     </div>
   </div>
@@ -24,23 +24,15 @@ export default {
     }
   },
 
-  name: 'allTodos',
+  name: 'singleTodo',
   computed: {
-    ...mapGetters(['allTodos']),
+    ...mapGetters(['singleTodo']),
   },
 
-  // find the todo with the id that matches the id in the route
-  // and set the todo to that todo
-  mounted() {
-    this.allTodos.find((todo) => {
-      if (todo.id === this.id) {
-      console.log(todo)
-        return this.todo = todo;
-      }
-    });
+  async mounted() {
+    await this.$store.dispatch('fetchSingleTodo', this.id);
+    this.todo = this.singleTodo;
   },
-
-
 };
 
 </script>

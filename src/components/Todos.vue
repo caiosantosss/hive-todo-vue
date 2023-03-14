@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>Todos</h3>
+    <h3>TASK LIST</h3>
     <div class="legend">
       <span>Double click to mark as complete</span>
       <span>
@@ -37,7 +37,6 @@ export default {
   methods: {
     ...mapActions(['fetchTodos', 'deleteTodo', 'updateTodo']),
     onDblClick(todo) {
-      console.log(todo)
       if (todo.id) {
         const updatedTodo = {
           id: todo.id,
@@ -48,7 +47,12 @@ export default {
       } else {
         console.log('Todo not found');
       }
+    },
+    // create a method to send the todo object to the singleTodo component
+    sendTodo(todo) {
+      this.$router.push({ path: `/task/${todo.id}`, props: { title: todo.title, id: todo.id, completed: todo.completed } });
     }
+
   },
   computed: {
     ...mapGetters(['allTodos']),

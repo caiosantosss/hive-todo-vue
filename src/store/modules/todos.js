@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const state = {
-  todos: []
+  todos: [],
+  todo: {},
 };
 
 // getting the state
@@ -9,6 +10,9 @@ const getters = {
   allTodos: state => {
     return state.todos;
   },
+  singleTodo: state => {
+    return state.todo;
+  }
 };
 
 const actions = {
@@ -40,6 +44,12 @@ const actions = {
     const response = await axios.get(`https://jsonplaceholder.typicode.com/todos?_limit=${limit}`);
     // commit the mutation to set the state
     commit('setTodos', response.data);
+  },
+  async fetchSingleTodo ({ commit }, id) {
+    // using axios to get the data
+    const response = await axios.get(`https://jsonplaceholder.typicode.com/todos/${id}`);
+    // commit the mutation to set the state
+    commit('setTodo', response.data);
   }
 };
 
@@ -59,7 +69,10 @@ const mutations = {
   },
   addTodo: (state, newTodo) => {
     state.todos.unshift(newTodo);
-  }
+  },
+  setTodo: (state, todo) => {
+    state.todo = todo;
+  },
 };
 
 export default {

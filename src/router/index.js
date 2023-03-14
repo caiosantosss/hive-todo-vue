@@ -1,7 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Home from "../views/Home.vue";
 import SingleTodo from "../components/SingleTodo.vue";
-import Test from "../components/Test.vue";
 
 const routes = [
   {
@@ -14,11 +13,6 @@ const routes = [
     name: "singleTodo",
     component: SingleTodo,
     props: true,
-  },
-  {
-    path: "/test",
-    name: "Test",
-    component: Test,
   },
 ];
 
