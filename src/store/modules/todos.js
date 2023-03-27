@@ -22,20 +22,15 @@ const actions = {
     // commit the mutation to set the state
     commit('setTodos', response.data);
   },
-  async deleteTodo({ commit }, id) {
-    // using axios to delete the data
-    await axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`);
+  deleteTodo({ commit }, id) {
     commit('removeTodo', id);
   },
-  async updateTodo({ commit }, updatedTodo) {
-    // using axios to update the data
-    const response = await axios.put(`https://jsonplaceholder.typicode.com/todos/${updatedTodo.id}`, updatedTodo);
-    commit('updateTodo', response.data);
+  updateTodo({ commit }, updatedTodo) {
+    commit('updateTodo', updatedTodo);
   },
-  async addTodo({ commit }, title) {
-    // using axios to add the data
-    const response = await axios.post('https://jsonplaceholder.typicode.com/todos', { title, completed: false });
-    commit('addTodo', response.data);
+  addTodo({ commit }, title) {
+    const newTodo = { id: Date.now(), title, completed: false };
+    commit('addTodo', newTodo);
   },
   async filterTodos({ commit }, e) {
     // Get selected number
